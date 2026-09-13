@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { CameraControls, Text } from "@react-three/drei";
 import * as THREE from "three";
@@ -20,7 +20,7 @@ function Ground() {
 
 function GridDots() {
   // Subtle grid of small cylinders instead of wireframe (looks nicer)
-  const dots: JSX.Element[] = [];
+  const dots: React.JSX.Element[] = [];
   for (let c = -2; c <= 5; c++) {
     for (let r = -2; r <= 5; r++) {
       const x = c * CELL - (3 * CELL) / 2;
