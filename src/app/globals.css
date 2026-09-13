@@ -1,26 +1,149 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #0A1120;
+  --bg-soft: #101B30;
+  --panel: #141F38;
+  --glass: rgba(255,255,255,0.055);
+  --glass-strong: rgba(255,255,255,0.09);
+  --glass-border: rgba(255,255,255,0.13);
+  --text: #F3F1E8;
+  --text-soft: #A9AFC0;
+  --text-faint: #6D7488;
+  --glow: #F0C77A;
+  --glow-soft: rgba(240,199,122,0.28);
+  --teal: #8FC7B8;
+  --teal-soft: rgba(143,199,184,0.16);
+  --coral: #E68A6C;
+  --coral-soft: rgba(230,138,108,0.16);
+  --paper-bg: #F1ECDF;
+  --paper-line: #D9D2BC;
+  --room-teal: #4E8577;
+  --room-gold: #C99A45;
+  --room-coral: #C15A3C;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-soft);
+  --color-panel: var(--panel);
+  --color-glass: var(--glass);
+  --color-glass-strong: var(--glass-strong);
+  --color-glass-border: var(--glass-border);
+  --color-text: var(--text);
+  --color-text-soft: var(--text-soft);
+  --color-text-faint: var(--text-faint);
+  --color-glow: var(--glow);
+  --color-glow-soft: var(--glow-soft);
+  --color-teal: var(--teal);
+  --color-teal-soft: var(--teal-soft);
+  --color-coral: var(--coral);
+  --color-coral-soft: var(--coral-soft);
+  --color-paper-bg: var(--paper-bg);
+  --color-paper-line: var(--paper-line);
+  --color-room-teal: var(--room-teal);
+  --color-room-gold: var(--room-gold);
+  --color-room-coral: var(--room-coral);
+
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-fraunces);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ─── Reset ─────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { height: 100%; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-inter), sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  cursor: none !important;
+}
+
+/* Use the dot and ring as the site-wide pointer on mouse and trackpad devices. */
+*, a, button, input, label, select, textarea {
+  cursor: none !important;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-fraunces), serif;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.1;
+}
+
+code, .mono {
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ─── Custom cursor elements ─────────────── */
+#compass-cursor-dot,
+#compass-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+}
+
+#compass-cursor-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--glow);
+  box-shadow: 0 0 0 2px rgba(10,17,32,0.8), 0 0 12px var(--glow);
+}
+
+#compass-cursor-ring {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--glow);
+  opacity: 0.55;
+  transition: opacity 0.2s;
+  box-shadow: 0 0 12px rgba(240,199,122,0.16);
+}
+
+/* ─── Loader ─────────────────────────────── */
+#compass-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ─── Scrollbar ──────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 99px; }
+
+/* ─── 3D map canvas fix ──────────────────── */
+.map-canvas-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ─── Keyframes ──────────────────────────── */
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
